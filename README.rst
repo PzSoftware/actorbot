@@ -1,95 +1,93 @@
 ========
-ActorBot
+APIBot
 ========
 
-A simple python implementation `Actor Messaging <https://github.com/actorapp>`_ bot API
+A simple python implementation `Odyn <www.odynapp.com>_ bot API
 ======================================================
 
 Features
 ========
+Python puro com asyncio e aiohttp
+* Conexão websocket para ws API wss API-endpoint
+* Enviar e receber mensagens
+* Módulo API
 
-* simple, small and extensible. It's easy to write own `Actor Messaging <https://github.com/actorapp>`_ bots.
-* pure Python with asyncio and aiohttp
-* websocket connection to Actor ws|wss API-endpoint
-* sending and receiving messages
-* API module
-* `LICENSE <https://github.com/unreg/actorbot/blob/master/LICENSE.txt>`_
 
-API module
+Módulo API
 ==========
 
-- Messaging: SendMessage, UpdateMessageContent
+- Mensagens: SendMessage, UpdateMessageContent
 
-- Groups: CreateGroup, CreateGroupWithOwner, UpdateShortName, AddGroupExtString, AddGroupExtBool, RemoveExt, InviteUser
+- Grupos: CreateGroup, CreateGroupWithOwner, UpdateShortName, AddGroupExtString, AddGroupExtBool, RemoveExt, InviteUser
 
 - KeyValue: SetVAlue, GetValue, DeleteValue, GetKeys
 
-- Files: UploadFile, DownloadFile
+- Arquivos: UploadFile, DownloadFile
 
-- Stickers: CreateStickerPack, AddSticker, ShowStickerPacks, ShowStickers, DeleteSticker, MakeStickerPackDefault, UnmakeStickerPackDefault,
+- Etiquetas: CreateStickerPack, AddSticker, ShowStickerPacks, ShowStickers, DeleteSticker, MakeStickerPackDefault, UnmakeStickerPackDefault,
 
-- Bots: CreateBot
+- Bots: CriarBot
 
-- Users: FindUser, ChangeUserName, ChangeUserNickname, ChangeUserAbout, ChangeUserAvatar, IsAdmin, AddSlashCommand, RemoveSlashCommand, AddUserExtString, AddUserExtBool, RemoveUserExt
+- Usuários: FindUser, ChangeUserName, ChangeUserNickname, ChangeUserAbout, ChangeUserAvatar, IsAdmin, AddSlashCommand, RemoveSlashCommand, AddUserExtString, AddUserExtBool, RemoveUserExt
 
 - WebHooks: RegisterHook, GetHooks
 
-Requirements
+Requisitos
 ============
 
-* Python >= 3.5.1
-* `aiohttp >= 0.22.0 <https://github.com/KeepSafe/aiohttp>`_
-* async_timeout >= 1.1.0 (optional)
+* Python> = 3.5.1
+* `Aiohttp> = 0.22.0 <https://github.com/KeepSafe/aiohttp>` _
+* Async_timeout> = 1.1.0 (opcional)
 
 
-Getting started
-===============
+Começando
+================
 
 
-Make your own conversation inherited from base class *Conversation*. For example simple echo bot (more in `Wiki <https://github.com/unreg/actorbot/wiki>`_):
+Faça a sua própria conversa herdada da classe base * Conversação *. Por exemplo, simple echo bot (mais em `Wiki <https://github.com/PzSoftware/actorbot/wiki>` _):
 
-.. code-block:: python
+.. code-block :: python
 
-    from actorbot.bots import Conversation
-    from actorbot.api import messaging
-
-
-    class EchoConversation(Conversation):
-        """ Simple echo bot """
-        async def message_handler(self, message):
-            out_msg = messaging.SendMessage(self._get_id(),
-                                            peer=self._peer,
-                                            message=message)
-            await self.send(out_msg)
-
-        async def response_handler(self, message):
-            await super().response_handler(message)
+    De actorbot.bots import Conversação
+    De mensagens de importação de actorbot.api
 
 
-run one or more bots through starter:
+    Classe EchoConversation (Conversação):
+        "" Simples echo bot "" "
+        Async def message_handler (self, mensagem):
+            Out_msg = messaging.SendMessage (self._get_id (),
+                                            Peer = self._peer,
+                                            Message = mensagem)
+            Aguardar self.send (out_msg)
 
-.. code-block:: python
+        Async def response_handler (self, mensagem):
+            Aguarde super (). Response_handler (mensagem)
+
+
+Executar um ou mais bots através do iniciador:
+
+.. code-block :: python
 
     from actorbot import Bot
     from actorbot.bots import EchoConversation
 
     ...
 
-    ownbot = Bot(endpoint='YOUR_ACTOR_SERVER_ENDPOINT',
-                 token='YOUR_BOT_TOKEN',
-                 name='SOME_BOT_NAME',
-                 conversation=EchoConversation)
+    Ownbot = Bot (endpoint = 'YOUR_ACTOR_SERVER_ENDPOINT',
+                 Token = 'YOUR_BOT_TOKEN',
+                 Name = 'SOME_BOT_NAME',
+                 Conversa = EchoConversation)
 
-    bots = [ownbot]
+    Bots = [ownbot]
 
-    transports = [asyncio.ensure_future(bot.transport.run()) for bot in bots]
-    processors = [asyncio.ensure_future(bot.run()) for bot in bots]
+    Transports = [asyncio.ensure_future (bot.transport.run ()) para bot em bots]
+    Processors = [asyncio.ensure_future (bot.run ()) para bot em bots]
 
-    loop.run_until_complete(asyncio.wait(transports + processors))
+    Loop.run_until_complete (asyncio.wait (transportes + processadores))
 
     ...
 
-Feedback
---------
 
-https://gitter.im/pyactorbot
+
+
+
